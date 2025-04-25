@@ -1,4 +1,6 @@
-//import 'package:flutter/converter_page.dart';
+//import 'package:cse_3212_flutter/converter_page.dart';
+
+import 'package:flutter_project_2/converter_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,41 +12,40 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedItem = 0;
-  final _widgetOptions = [
-    ConverterPage(),
-  ];
+  final _widgetOptions = [ConverterPage(), HomePage()];
   mySnackBar(msg, context) {
-    return ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(msg)),
-    );
+    return ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(msg)));
   }
 
   myAlertDialog(context) {
     return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return Expanded(
-            child: AlertDialog(
-              title: Text("Hello!!!"),
-              content: Text("Do you want to delete?"),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    mySnackBar("Successful!!", context);
-                    Navigator.of(context).pop();
-                  },
-                  child: Text("Yes"),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text("No"),
-                )
-              ],
-            ),
-          );
-        });
+      context: context,
+      builder: (BuildContext context) {
+        return Expanded(
+          child: AlertDialog(
+            title: Text("Hello!!!"),
+            content: Text("Do you want to delete?"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  mySnackBar("Successful!!", context);
+                  Navigator.of(context).pop();
+                },
+                child: Text("Yes"),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("No"),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -64,18 +65,21 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             ListTile(
-                leading: Icon(Icons.home),
-                title: Text("Home"),
-                onTap: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => HomePage()));
-                }),
+              leading: Icon(Icons.home),
+              title: Text("Home"),
+              onTap: () {
+                Navigator.of(
+                  context,
+                ).push(MaterialPageRoute(builder: (context) => HomePage()));
+              },
+            ),
             ListTile(
               leading: Icon(Icons.swap_horiz),
               title: Text("Converter"),
               onTap: () {
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => ConverterPage()));
+                  MaterialPageRoute(builder: (context) => ConverterPage()),
+                );
               },
             ),
             ListTile(
@@ -93,7 +97,7 @@ class _HomePageState extends State<HomePage> {
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(icon: Icon(Icons.message), label: "Contact"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile")
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
         ],
         onTap: (int index) {
           setState(() {
